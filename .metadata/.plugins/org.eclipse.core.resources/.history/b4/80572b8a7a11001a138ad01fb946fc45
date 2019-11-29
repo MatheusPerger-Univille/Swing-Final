@@ -1,0 +1,72 @@
+package br.univille.poo.mvc.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import br.univille.poo.mvc.model.LivroModel;
+
+public class LivroModelDAO extends BasicoDAO{
+	
+	public void insert(LivroModel livro) {
+
+		String sql = " insert into LivroModel(nome, sobrenome) values(?,?)";
+		
+		try (Connection conn = getConnection();
+			 PreparedStatement statement = conn.prepareStatement(sql)){
+			statement.setString(1, LivroModel.getNome());
+			statement.setString(2, LivroModel.getSobrenome());
+			statement.execute();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void delete(LivroModel livro) {
+		
+		String sql = " delete from LivroModel where id = ?";
+		
+		try(Connection conn = getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql)) {
+			statement.setInt(1, LivroModel.getId());
+			statement.execute();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void update(LivroModel livro) {
+		String sql = " update LivroModel set nome = ?, sobrenome = ? where id = ?";
+		
+		try (Connection conn = getConnection();
+			 PreparedStatement statement = conn.prepareStatement(sql)){
+			statement.setString(1, LivroModel.getNome());
+			statement.setString(2, LivroModel.getSobrenome());
+			statement.setInt(3, LivroModel.getId());
+			statement.execute();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public LivroModel getById(int id) {
+		LivroModel LivroModel = null;
+		String sql = " select id, nome, sobrenome from LivroModel where id = ?";
+		
+		try(Connection conn = getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql)) {
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				LivroModel = new LivroModel();
+				LivroModel.setId(resultSet.getInt(1));
+				LivroModel.setNome(resultSet.getString(2));
+				LivroModel.setSobrenome(resultSet.getString(3));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return LivroModel;
+	}
+	
+}

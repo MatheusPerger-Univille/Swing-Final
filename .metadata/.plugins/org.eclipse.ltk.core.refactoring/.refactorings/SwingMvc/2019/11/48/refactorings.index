@@ -1,0 +1,7 @@
+1574900869007	Rename type 'CadastroPessoaControl'
+1574900884593	Rename type 'PessoaModel'
+1574900899428	Rename type 'CadastroPessoaView'
+1574901024714	Rename method 'getCpf'
+1574901043798	Rename method 'setCpf'
+1574901159240	Rename method 'getEmail'
+1574901177867	Rename method 'setEmail'

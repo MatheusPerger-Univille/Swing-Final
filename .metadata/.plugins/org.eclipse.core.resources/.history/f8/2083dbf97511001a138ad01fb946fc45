@@ -1,0 +1,20 @@
+package br.univille.poo.mvc;
+
+import br.univille.poo.mvc.control.CadastroLivroControl;
+import br.univille.poo.mvc.model.LivroModel;
+import br.univille.poo.mvc.view.CadastroPessoaView;
+
+public class Main {
+
+	public static void main(String[] args) {
+		LivroModel p = new LivroModel();
+		p.setCpf("456.455.454-31");
+		p.setEmail("fulano@gmail.com");
+		p.setNome("Fulano");
+		p.setId(123);
+		
+		CadastroLivroControl control = new CadastroLivroControl(new CadastroPessoaView(),p);
+		control.exibirTela();
+	}
+
+}
